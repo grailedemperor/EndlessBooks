@@ -23,3 +23,9 @@ nav a {
   color: white;
   text-decoration: none;
 }
+
+form {
+  font-size: 2rem;
+  border: solid 1px red;
+  text-align: center;
+}
