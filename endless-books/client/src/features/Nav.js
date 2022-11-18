@@ -7,4 +7,4 @@ export default function Nav() {
       <Link to="/register">Register</Link>
     </nav>
   );
-} 
+}
