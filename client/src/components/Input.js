@@ -1,5 +1,5 @@
 //responsible for creating input and logic that surrounds it.
-export default function Input({ label, value, onChange, type }) {
+export default function Input({ label, value, onChange, ...props }) {
   return (
     <div>
       <label>{label}: </label>
@@ -7,7 +7,7 @@ export default function Input({ label, value, onChange, type }) {
         onChange={(e) => onChange(e.target.value)}
         value={value}
         placeholder={label}
-        type={type}
+        {...props}
       />
     </div>
   );
