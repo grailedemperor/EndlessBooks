@@ -1,21 +1,22 @@
 import { Col } from 'react-bootstrap'
 
 
-const BookCard = ({title, author, year, imgUrl}) => {
+const BookCard = ({title, author, imgUrl, year}) => {
     return (
-        <Col sm={6} md={4}>
-            <div className="book-imgbx item">
-                <img src={imgUrl} alt="bookImage"/>
-                <div className="book-txtx">
-                    <h1>{title}</h1>
-                    <br></br>
-                    <h3>{author}</h3>
-                    <br></br>
-                    <h2>{year}</h2>
-                    <br></br>
+        <div className="book-item">
+            <Col sm={12} md={12}>
+                <div className="proj-imgbx">
+                    <img src={imgUrl} alt=""/>
+                    <div className="proj-txtx">
+                        <h2>{title}</h2>
+                        <br></br>
+                        <h3>{author}</h3>
+                        <br></br>
+                        <p>{year}</p>
+                    </div>
                 </div>
-            </div>
-        </Col>
+            </Col>
+        </div>
     )
 }
 

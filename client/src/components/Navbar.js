@@ -1,0 +1,56 @@
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useEffect, useState } from "react";
+import logo from '../assets/img/library.svg';
+import { NavLink } from 'react-router-dom';
+import book from '../assets/img/book.svg'
+
+const NavBar = () => {
+
+  const [activeLink, setActiveLink] = useState('home');
+
+  const [scrolled, seScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 50) {
+        seScrolled(true);
+      } else {
+        seScrolled(false);
+      }
+    }
+
+    window.addEventListener("scroll", onScroll);
+  }, [])
+
+
+  const onUpdateActiveLink = (value) => {
+    setActiveLink(value);
+  }
+
+  return (
+    <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
+        <Container>
+          <Navbar.Brand>
+            <NavLink to='/'>
+            <img className='lib-logo' src={logo} alt="logo" />
+            </NavLink>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" >
+            <span className="navbar-toggler-icon"></span>
+          </Navbar.Toggle>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <li><NavLink to="/" className={activeLink === 'login' ? 'active navbar-link  navi' : 'navbar-link navi'} onClick={() => onUpdateActiveLink('login')}>Login <img className= 'book' src={book} alt="book"/></NavLink></li>
+              <li><NavLink to="/register" className={activeLink === 'register' ? 'active navbar-link  navi' : 'navbar-link navi'} onClick={() => onUpdateActiveLink('register')}>Register <img className= 'book' src={book} alt="book"/></NavLink></li>
+              <li><NavLink to="/home" className={activeLink === 'home' ? 'active navbar-link  navi' : 'navbar-link navi'} onClick={() => onUpdateActiveLink('home')}>Home <img className= 'book' src={book} alt="book"/></NavLink></li>
+              <li><NavLink to="/booksearch" className={activeLink === 'booksearch' ? 'active navbar-link navi' : 'navbar-link navi'} onClick={() => onUpdateActiveLink('booksearch')}>Book Search <img className= 'book' src={book} alt="book"/></NavLink></li>
+              <li><NavLink to="/tbr" className={activeLink === 'tbr' ? 'active navbar-link navi' : 'navbar-link navi'} onClick={() => onUpdateActiveLink('tbr')}>TBR <img className= 'book' src={book} alt="book"/></NavLink></li>
+              <li><NavLink to="/library" className={activeLink === 'library' ? 'active navbar-link navi' : 'navbar-link navi'} onClick={() => onUpdateActiveLink('library')}>Library <img className= 'book' src={book} alt="book"/></NavLink></li>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+    </Navbar>
+  )
+};
+
+export default NavBar;
