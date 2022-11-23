@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import logo from '../assets/img/library.svg';
 import { NavLink } from "react-router-dom";
+import React from 'react';
 
 const Footer = () => {
   return (

@@ -16,7 +16,7 @@
 }
 /********Login CSS********/
 .login-form{
-  margin: 22rem;
+  margin: 23rem;
 }
 /********Register CSS********/
 .register-form{
@@ -31,8 +31,8 @@
   padding-left: 380px;
 }
 .navbar-brand{
-  width: 4%;
-  margin-left: -17rem;
+  width: 9%;
+  margin-left: -11rem;
 }
 nav.navbar {
   position: fixed;
@@ -309,7 +309,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 .footer img {
   width: 9%;
-  margin-left: -13rem;
+  margin-left: -10rem;
 }
 .footer p {
   padding-top: 1rem;
