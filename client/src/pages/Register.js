@@ -6,20 +6,22 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <form>
-      <Input
-        type="username"
-        onChange={setUserName}
-        value={username}
-        label="Username"
-      />
-      <Input type="email" onChange={setEmail} value={email} label="Email" />
-      <Input
-        type="password"
-        onChange={setPassword}
-        value={password}
-        label="Password"
-      />
-    </form>
+    <div className="register-form">
+      <form>
+        <Input
+          type="username"
+          onChange={setUserName}
+          value={username}
+          label="Username"
+        />
+        <Input type="email" onChange={setEmail} value={email} label="Email" />
+        <Input
+          type="password"
+          onChange={setPassword}
+          value={password}
+          label="Password"
+        />
+      </form>
+    </div>
   );
 }
