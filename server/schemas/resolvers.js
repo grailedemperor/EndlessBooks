@@ -8,9 +8,13 @@ const resolvers = {
       return User.findbyId({ _id: userId });
     },
 
-    book: async (parent, { bookId }) => {
-      return Book.findbyId({ _id: bookId });
+    book: async (parent, args) => {
+      return await Book.findbyId(args.id).populate();
     },
+
+    books: async () => {
+      return Book.find({ });
+    }
   },
 
   Mutation: {
