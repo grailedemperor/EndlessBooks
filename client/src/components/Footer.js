@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
-import logo from '../assets/img/library.svg';
+import logo from "../assets/img/library.svg";
 import { NavLink } from "react-router-dom";
+import React from "react";
 
 const Footer = () => {
   return (
@@ -8,8 +9,8 @@ const Footer = () => {
       <Container>
         <Row className="align-items-center">
           <Col size={12} sm={6}>
-          <NavLink to='/'>
-          <img className='lib-logo' src={logo} alt="logo" />
+            <NavLink to="/">
+              <img className="lib-logo" src={logo} alt="logo" />
             </NavLink>
           </Col>
           <Col size={12} sm={6} className="text-center text-sm-end">
@@ -18,7 +19,7 @@ const Footer = () => {
         </Row>
       </Container>
     </footer>
-  )
-}
+  );
+};
 
 export default Footer;
