@@ -1,0 +1,22 @@
+[
+    {
+      "username": "Emmanuel",
+      "email": "emmanuelcodes@gmail.com",
+      "password": "testpsw01"
+    },
+    {
+      "username": "Devon",
+      "email": "devoncodes@gmail.com",
+      "password": "testpwd02"
+    },
+    {
+      "username": "Eleanor",
+      "email": "eleanorcodes@gmail.com",
+      "password": "testpwd03"
+    },
+    {
+      "username": "Cecilia",
+      "email": "ceciliacodes@gmail.com",
+      "password": "testpwd04"
+    }
+]
