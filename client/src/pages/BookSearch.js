@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Stack } from "react-bootstrap";
+import { Container, Stack } from "react-bootstrap";
 import BookGrid from "../components/BookGrid";
 import BookSearchForm from "../features/BookSearchForm";
 
@@ -9,6 +9,7 @@ const getFakeBooks = () =>
     .fill(null)
     .map((item, index) => {
       const _id = index + 1;
+      // @ts-ignore
       return /**@type {Book} */ ({
         _id,
         author: "some author" + _id,
@@ -31,9 +32,13 @@ export default function BookSearch() {
   }
 
   return (
-    <Stack className="book-search p-5" direction="horizontal">
-      <BookSearchForm onSubmit={handleSearch} />
-      <BookGrid bookList={searchResults}/>
-    </Stack>
+    <section className="booksearch-bx">
+      <Container>
+        <Stack className="book-search" direction="horizontal">
+          <BookSearchForm onSubmit={handleSearch} />
+          <BookGrid bookList={searchResults} />
+        </Stack>
+      </Container>
+    </section>
   );
 }
