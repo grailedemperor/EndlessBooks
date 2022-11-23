@@ -7,17 +7,23 @@ const bookSchema = new Schema({
     unique: true,
     trim: true,
   },
-  author: {
+  authors: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  subject: {
     type: String,
     required: true,
   },
-  genre: {
+  image: {
     type: String,
-    required: true,
+    required: false,
   },
-  year: {
-    type: Number,
-    required: true,
+  link: {
+    type: String,
+    required: false,
   },
   read: {
     type: Boolean,
