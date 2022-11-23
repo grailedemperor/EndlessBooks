@@ -1,4 +1,6 @@
 //responsible for creating input and logic that surrounds it.
+import React from "react";
+
 export default function Input({ label, value, onChange, ...props }) {
   return (
     <div>
