@@ -13,8 +13,9 @@ const typeDefs = gql`
     name: String
     author: String
     genre: String
-    year: Number
+    year: String
     read: Boolean
+    title: String
   }
 `;
 

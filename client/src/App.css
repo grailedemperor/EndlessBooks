@@ -1,38 +1,328 @@
-.App {
+/************ Custom Font ************/
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Bold.ttf');
+	font-weight: 700;
+}
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Medium.ttf');
+	font-weight: 500;
+}
+@font-face {
+	font-family: Centra;
+	src: url('./assets/font/CentraNo2-Book.ttf');
+	font-weight: 400;
+}
+/********Login CSS********/
+.login-form{
+  margin: 22rem;
+}
+/********Register CSS********/
+.register-form{
+  margin: 22rem;
+}
+/********Book Search CSS********/
+.book-search{
+  margin: 22rem;
+}
+/************ Navbar Css ************/
+#basic-navbar-nav{
+  padding-left: 380px;
+}
+.navbar-brand{
+  width: 4%;
+  margin-left: -17rem;
+}
+nav.navbar {
+  /* position: fixed; */
+  /* width: 100%;
+  top: 0;
+  z-index: 9999;
+  transition:  0.32s ease-in-out; */
+  background:linear-gradient(90.21deg, #2d1c26 -5.91%, #ce4805 111.58%);
+}
+nav.navbar.scrolled {
+  padding: 0px 0;
+  background-color: #121212;
+}
+nav.navbar a.navbar-brand {
+    width: 100%;
+}
+nav.navbar .navbar-nav .nav-link.navbar-link {
+  font-weight: 400;
+  color: rgb(0, 0, 0) !important;
+  letter-spacing: 0.8px;
+  padding: 0 47px;
+  font-size: 18px;
+  opacity: 0.75;
+}
+nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
+nav.navbar .navbar-nav a.nav-link.navbar-link.active {
+    opacity: 1;
+}
+span.navbar-text {
+    display: flex;
+    align-items: center;
+}
+.navbar-text button {
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
+  padding: 18px 34px;
+  font-size: 18px;
+  margin-left: 18px;
+	position: relative;
+	background-color: transparent;
+	transition: 0.3s ease-in-out;
+}
+.navbar-text button span {
+  z-index: 1;
+}
+.navbar-text button::before {
+  content: "";
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  background-color: rgb(0, 0, 0);
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: 0.3s ease-in-out;
+}
+.navbar-text button:hover {
+  color: #121212;
+}
+.navbar-text button:hover::before {
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+nav.navbar .navbar-toggler:active,
+nav.navbar .navbar-toggler:focus {
+	outline: none;
+    box-shadow: none;
+}
+nav.navbar .navbar-toggler-icon {
+  width: 24px;
+  height: 17px;
+  background-image: none;
+  position: relative;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  transition: all 300ms linear;
+  top: -2px;
+}
+nav.navbar .navbar-toggler-icon:focus {
+	border-bottom: 2px solid rgb(0, 0, 0);
+}
+nav.navbar .navbar-toggler-icon:after,
+nav.navbar .navbar-toggler-icon:before {
+	width: 24px;
+	position: absolute;
+	height: 2px;
+	background-color: rgb(0, 0, 0);
+	top: 0;
+	left: 0;
+	content: '';
+	z-index: 2;
+	transition: all 300ms linear;
+}
+nav.navbar .navbar-toggler-icon:after {
+	top: 8px;
+}
+nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
+	transform: rotate(45deg);
+	background-color: rgb(0, 0, 0);
+	height: 2px;
+}
+nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
+	transform: translateY(8px) rotate(-45deg);
+	background-color: rgb(0, 0, 0);
+	height: 2px;
+}
+nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+	border-color: transparent;
+}
+
+.navi {
+  font-weight: 400;
+  color: rgb(0, 0, 0) !important;
+  letter-spacing: 0.8px;
+  padding: 0 47px;
+  font-size: 18px;
+  opacity: 0.75;
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: var(--bs-nav-link-font-weight);
+  color: var(--bs-nav-link-color);
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+.me-auto{
+  margin-left: 550px;
+}
+.me-auto li{
+  display: inline;
+  padding-right: 30px;
+}
+.book{
+  margin-right: 10px;
+  height: 20px
+  ;
+}
+/************ Homepage Css ************/
+#home{
+  margin-top: 4rem;
+}
+.home-bx{
+  background-image: url('./assets/img/HD-Library-Wallpaper.jpg');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 1200px;
+}
+
+.carousel-header{
+  color: white
+}
+
+
+.carousel-header h1{
+  padding: 40px 10px ;
+  width: 100%;
+  font-family: Centra;
+}
+
+.carousel-header .tagline{
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  background: linear-gradient(90.21deg, #2d1c26 -5.91%, #ce4805 111.58%);
+  border: 1px solid rgb(255, 255, 255);
+  font-size: 20px;
+  display: inline-block;
+}
+.carousel-header h2{
+  
+  font-family: Centra;
+  color: #ce4805;
+}
+
+.subtitle-text{
+  padding-left: 47rem;
+  height: 100px;
+  position: relative;
+  font-style: italic;
+  color: white;
+  font-family: Centra;
+}
+
+.title-text{
+  margin-top: 3rem;
+  margin-left: 1rem;
+  position: relative;
+  border-radius: 100px;
+  font-family: Centra;
+  font-weight: 700;
+  color: white;
+
+}
+
+.carousel-bx {
+  background: #151515;
+  border-radius: 64px;
   text-align: center;
+  padding: 10px 30px;
+  margin-top: 1rem;
+  box-sizing: content-box;
+  height: 800px;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.skill-slider {
+  width: 100%;
+  margin: 1rem;
+  position: relative;
+  height: 350px;
+  
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.skill-slider .book-item img {
+  width: 80%;
+  margin: 0 auto 15px auto;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.proj-imgbx {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.proj-imgbx::before {
+  content: "";
+  background: linear-gradient(90.21deg, #2d1c26 -5.91%, #ce4805 111.58%);
+  opacity: 0.85;
+  position: absolute;
+  width: 80%;
+  height: 0%;
+  transition: 0.4s ease-in-out;
+}
+.proj-imgbx:hover::before {
+  height: 94%;
+  border-radius: 19px;
+}
+.proj-txtx {
+  position: absolute;
+  text-align: center;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.5s ease-in-out;
+  opacity: 0;
+  width: 60%;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.proj-imgbx:hover .proj-txtx {
+  top: 50%;
+  opacity: 1;
+}
+.proj-txtx h3 {
+  font-size: 18px;
+  font-weight: 200;
+  letter-spacing: 0.8px;
+  
+}
+.proj-txtx h2 {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0.8px;
+  line-height: 1.1em;
+}
+/************ Footer Css ************/
+.footer {
+  background: linear-gradient(90.21deg, #2d1c26 -5.91%, #ce4805 111.58%);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  line-height: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer img {
+  width: 9%;
+  margin-left: -13rem;
 }
+.footer p {
+  padding-top: 1rem;
+  font-weight: 400;
+  font-size: 14px;
+  color: #B8B8B8;
+  letter-spacing: 0.5px;
+}
+
+/* chapter text */
+.text-white {
+  color: #fff !important;
+}
+
+
+/* chapter backgroung-colors  */

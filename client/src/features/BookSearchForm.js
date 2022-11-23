@@ -30,7 +30,7 @@ export default function BookSearchForm({ onSubmit }) {
         <Input label="Search" value={term} onChange={setTerm} required />
       </div>
       <div>
-        <button>Search</button>
+        <button type="submit">Search</button>
       </div>
     </form>
   );
