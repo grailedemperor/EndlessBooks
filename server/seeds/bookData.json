@@ -1,7 +1,7 @@
 [
     {
        "title": "Pride and Prejudice",
-       "authors": "Jane Austen",
+       "authors": ["Jane Austen"],
        "subject": "Romance",
        "image": "placeholder",
        "link": "link here",
@@ -9,7 +9,7 @@
     },
     {
         "title": "One Hundred images of Solitude",
-        "authors": "Gabriel Garcia Marquez",
+        "authors": ["Gabriel Garcia Marquez"],
         "subject": "Magical Realism",
         "image": "placeholder",
         "link": "link here",
@@ -17,7 +17,7 @@
      },
      {
         "title": "Where the Crawdads Sing",
-        "authors": "Delia Owens",
+        "authors": ["Delia Owens"],
         "subject": "Fiction",
         "image": "placeholder",
         "link": "link here",
@@ -25,7 +25,7 @@
      },
      {
         "title": "The Devil Wears Prada",
-        "author": "Lauren Weisberger",
+        "author": ["Lauren Weisberger"],
         "subject": "Roman a Clef",
         "image": "placeholder",
         "link": "link here",
