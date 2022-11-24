@@ -21,7 +21,12 @@ const userSchema = new Schema({
     unique: true,
     trim: true,
   },
-  books: [Book.schema],
+  books: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Book",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {

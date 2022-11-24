@@ -28,6 +28,7 @@ const typeDefs = gql`
     books: [Book]!
     book(bookId: ID!): Book
     user: User
+    toBeRead: Book
   }
 
   type Mutation {
@@ -35,11 +36,11 @@ const typeDefs = gql`
     addUser(userName: String!, email: String!, password: String!): User
     updateUser(userName: String, email: String, password: String): User
     addBook(
-    title: String!
-    authors: [String]
-    subject: String!
-    image: String!
-    link: String!
+      title: String!
+      authors: [String]
+      subject: String!
+      image: String!
+      link: String!
       read: Boolean
     ): Book
     readBook(bookId: ID!, read: Boolean): Book
