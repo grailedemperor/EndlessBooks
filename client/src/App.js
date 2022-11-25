@@ -8,9 +8,10 @@ import Footer from "./components/Footer";
 import BookSearch from "./pages/BookSearch";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Library from "./pages/Library";
+import TBR from "./pages/TBR";
 
 function App() {
-  
   return (
     <Router>
       <NavBar />
@@ -19,8 +20,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/booksearch" element={<BookSearch />} />
-        {/*<Route path="/tbr" element ={<TBR />} /> 
-        <Route path="/library" element={<Library/>} /> */}
+        <Route path="/tbr" element={<TBR />} />
+        <Route path="/library" element={<Library />} />
       </Routes>
       <Footer />
     </Router>
