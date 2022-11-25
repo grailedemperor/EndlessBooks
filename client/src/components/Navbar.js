@@ -1,9 +1,8 @@
 import { Container, Nav, Navbar, Stack } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/img/library.svg";
 import { NavLink } from "react-router-dom";
 import book from "../assets/img/book.svg";
-import React from "react";
 
 const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");

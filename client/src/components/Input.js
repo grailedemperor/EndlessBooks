@@ -1,13 +1,15 @@
+import React from "react";
+
 //responsible for creating input and logic that surrounds it.
-export default function Input({ label, value, onChange, ...props }) {
+export default function Input({ label, value, onChange, type }) {
   return (
     <div>
       <label>{label}: </label>
       <input
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         value={value}
         placeholder={label}
-        {...props}
+        type={type}
       />
     </div>
   );

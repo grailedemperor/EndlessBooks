@@ -1,40 +1,83 @@
-import React from "react";
-import { useState } from "react";
+import { Form } from 'react-bootstrap';
+import React, { useState } from "react";
 import Input from "../components/Input";
-
+import { searchGoogleBooks } from '../utils/API';
 const categories = ["Genre", "Author", "Title"];
 
-export default function BookSearchForm({ onSubmit }) {
+export default function BookSearchForm() {
   const [category, setCategory] = useState("");
   const [term, setTerm] = useState("");
+  const [bookList, setbookList] = useState([]);
 
-  function handleSubmit(e) {
+  // map bookList to BookGrid
+
+  const handleInputChange = async (e) => {
     e.preventDefault();
-    onSubmit({ category, term });
-  }
+    const v = e.currentTarget.value;
+    setTerm(v);
+  };
+
+  const handleCategoryChange = async (e) => {
+    e.preventDefault();
+    const v = e.currentTarget.value;
+    setCategory(v);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!term) {
+      return false;
+    }
+
+    try {
+      const response = await searchGoogleBooks(term, category);
+
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
+
+      const { items } = await response.json();
+
+      const bookData = items.map((book) => ({
+        bookId: book.id,
+        authors: book.volumeInfo.authors || ['No author to display'],
+        title: book.volumeInfo.title,
+        description: book.volumeInfo.description,
+        image: book.volumeInfo.imageLinks?.thumbnail || '',
+      }));
+
+      setbookList(bookData);
+      setTerm('');
+      setCategory('');
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
-    <section className="input-bx">
-      <form onSubmit={handleSubmit}>
+    <>
+      <Form onSubmit={handleFormSubmit}>
         <div>
           <select
             required
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={handleCategoryChange}
           >
             <option value="">Please select a category</option>
-            {categories.map((category) => {
-              return <option>{category}</option>;
+            {categories.map((category, index) => {
+              return <option key={index}>{category}</option>;
             })}
           </select>
         </div>
         <div>
-          <Input label="Search" value={term} onChange={setTerm} required />
+          <Input label="Search" value={term} onChange={handleInputChange} required type='text' />
         </div>
         <div>
-          <button type="submit">Search</button>
+          <button>Search</button>
         </div>
-      </form>
-    </section>
+      </Form>
+    </>
   );
 }
