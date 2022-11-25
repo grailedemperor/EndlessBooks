@@ -5,7 +5,19 @@ const { AuthenticationError } = require("apollo-server-express");
 const resolvers = {
   Query: {
     user: async (parent, { userId }) => {
-      return User.findbyId({ _id: userId });
+      return User.findbyId({ _id: userId }).populate("books");
+    },
+    users: async () => {
+      return User.find().populate("books");
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+        return userData;
+      }
+      throw new AuthenticationError("You must be logged in");
     },
 
     book: async (parent, args) => {
@@ -13,8 +25,12 @@ const resolvers = {
     },
 
     books: async () => {
-      return Book.find({ });
-    }
+      return Book.find({});
+    },
+
+    toBeRead: async () => {
+      return await Book.find({ read: false }).populate();
+    },
   },
 
   Mutation: {
@@ -56,11 +72,16 @@ const resolvers = {
       return await Book.create({ title, authors, subject, image, link, read });
     },
 
-    readBook: async (parent, args, context) => {
+    readBook: async (parent, { read }, context) => {
       if (context.user) {
-        return await Book.findByIdAndUpdate(context.book._id, args, {
-          new: true,
-        });
+        return await Book.findByIdAndUpdate(
+          context.book._id,
+          // TODO: This might need to be reverted to args
+          { read: true },
+          {
+            new: true,
+          }
+        );
       }
 
       throw new AuthenticationError("Not logged in");
