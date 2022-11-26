@@ -4,7 +4,6 @@ const bookSchema = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
   },
   authors: [

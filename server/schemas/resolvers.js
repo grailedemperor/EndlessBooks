@@ -25,9 +25,10 @@ const resolvers = {
     },
 
     books: async () => {
-      return Book.find({});
+      return User.findById().populate("books");
     },
 
+    // TODO: Needs to be edited to only populate signed-in user's books
     toBeRead: async () => {
       return await Book.find({ read: false }).populate();
     },
@@ -68,8 +69,28 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addBook: async (parent, { title, authors, subject, image, link, read }) => {
-      return await Book.create({ title, authors, subject, image, link, read });
+    addBook: async (parent, { newBook }, context) => {
+      if (context.user) {
+        const updateUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { books: newBook } },
+          { new: true }
+        );
+
+        return updateUser;
+      }
+    },
+
+    removeBook: async (parent, { bookId }, context) => {
+      if (context.user) {
+        const updateUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { books: bookId } },
+          { new: true }
+        );
+
+        return updateUser;
+      }
     },
 
     readBook: async (parent, { read }, context) => {
