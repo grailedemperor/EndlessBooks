@@ -27,3 +27,18 @@ export const BookByIDQuery = gql`
     }
   }
 `;
+
+
+export const Books_TO_BE_READ = gql`
+  query ToBeRead {
+    toBeRead {
+      _id
+      title
+      authors
+      subject
+      image
+      link
+      read
+    }
+  }
+`;
