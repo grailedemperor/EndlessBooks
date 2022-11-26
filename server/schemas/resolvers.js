@@ -21,7 +21,7 @@ const resolvers = {
     },
 
     book: async (parent, args) => {
-      return await Book.findbyId(args.id).populate();
+      return await Book.findById(args.bookId).populate();
     },
 
     books: async () => {
