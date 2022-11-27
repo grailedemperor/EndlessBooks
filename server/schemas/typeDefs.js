@@ -16,7 +16,8 @@ const typeDefs = gql`
     subject: String
     image: String
     link: String
-    read: Boolean
+    read: Boolean!
+    bookId: String!
   }
 
   input InsertedBook {

@@ -4,12 +4,9 @@ import Input from "../components/Input";
 import { searchGoogleBooks } from "../utils/API";
 const categories = ["Genre", "Author", "Title"];
 
-export default function BookSearchForm() {
+export default function BookSearchForm({ onResults }) {
   const [category, setCategory] = useState("");
   const [term, setTerm] = useState("");
-  const [bookList, setbookList] = useState([]);
-
-  // map bookList to BookGrid
 
   const handleInputChange = async (e) => {
     e.preventDefault();
@@ -31,23 +28,8 @@ export default function BookSearchForm() {
     }
 
     try {
-      const response = await searchGoogleBooks(term, category);
-
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
-
-      const { items } = await response.json();
-
-      const bookData = items.map((book) => ({
-        bookId: book.id,
-        authors: book.volumeInfo.authors || ["No author to display"],
-        title: book.volumeInfo.title,
-        description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || "",
-      }));
-
-      setbookList(bookData);
+      const results = await searchGoogleBooks(term, category);
+      onResults(results);
       setTerm("");
       setCategory("");
     } catch (err) {
@@ -67,17 +49,18 @@ export default function BookSearchForm() {
             })}
           </select>
         </Container>
+
         <div className="input-group text">
           <Input
             label="Search"
             value={term}
             onChange={handleInputChange}
-            required
+            required={true}
             type="text"
           />
         </div>
         <div>
-          <button type="submitF">Search</button>
+          <button type="submit">Search</button>
         </div>
       </Stack>
     </Form>

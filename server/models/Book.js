@@ -28,6 +28,10 @@ const bookSchema = new Schema({
     type: Boolean,
     required: false,
   },
+  bookId: {
+    type: String,
+    required: true
+  }
 });
 
 const Book = model("Book", bookSchema);

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, HashRouter } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./components/HomePage";
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <WonderousContex.Provider value={store}>
-      <Router>
+      <HashRouter>
         <NavBar />
         <Routes>
           <Route path="/*" element={<Login />} />
@@ -37,7 +37,7 @@ function App() {
           <Route path="/library" element={<Library />} />
         </Routes>
         <Footer />
-      </Router>
+      </HashRouter>
     </WonderousContex.Provider>
   );
 }
