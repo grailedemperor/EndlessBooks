@@ -30,8 +30,8 @@ const bookSchema = new Schema({
   },
   bookId: {
     type: String,
-    required: true
-  }
+    required: false,
+  },
 });
 
 const Book = model("Book", bookSchema);

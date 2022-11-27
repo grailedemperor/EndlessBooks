@@ -57,6 +57,9 @@ export const READ_BOOK = gql`
       image
       link
       read
+    }
+  }
+`;
 
 export const ADDBOOK_MUTATION = gql`
   mutation AddBook(
@@ -74,7 +77,6 @@ export const ADDBOOK_MUTATION = gql`
       bookId: $bookId
     ) {
       _id
-
     }
   }
 `;
