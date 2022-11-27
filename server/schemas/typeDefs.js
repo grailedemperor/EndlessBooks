@@ -16,7 +16,8 @@ const typeDefs = gql`
     subject: String
     image: String
     link: String
-    read: Boolean
+    read: Boolean!
+    bookId: String!
   }
 
   type Auth {
@@ -44,6 +45,7 @@ const typeDefs = gql`
       image: String!
       link: String!
       read: Boolean
+      bookId: String!
     ): Book
     readBook(bookId: ID!, read: Boolean): Book
   }
