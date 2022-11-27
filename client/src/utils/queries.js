@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const AllBooksQuery = gql`
+export const AllBooksQuery = gql/* GraphQL */ `
   query Books {
     books {
       _id
@@ -27,7 +27,6 @@ export const BookByIDQuery = gql`
     }
   }
 `;
-
 
 export const Books_TO_BE_READ = gql`
   query ToBeRead {

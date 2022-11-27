@@ -16,3 +16,23 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+
+export const ADDBOOK_MUTATION = gql`
+  mutation AddBook(
+    $title: String!
+    $subject: String!
+    $image: String!
+    $link: String!
+    $bookId: String!
+  ) {
+    addBook(
+      title: $title
+      subject: $subject
+      image: $image
+      link: $link
+      bookId: $bookId
+    ) {
+      _id
+    }
+  }
+`;

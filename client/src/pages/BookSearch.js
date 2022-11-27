@@ -2,6 +2,20 @@ import React, { useState } from "react";
 import { Container, Stack } from "react-bootstrap";
 import BookGrid from "../components/BookGrid";
 import BookSearchForm from "../features/BookSearchForm";
+import { searchGoogleBooks } from "../utils/API";
+
+const transform = (/** @type {import("../../books").Item} */ bookItem) => {
+  return /** @type {Book}*/ ({
+    _id: null,
+    bookId: bookItem.id,
+    authors: bookItem.volumeInfo.authors || ["No author to display"],
+    title: bookItem.volumeInfo.title,
+    description: bookItem.volumeInfo.description,
+    image: bookItem.volumeInfo.imageLinks?.thumbnail || "",
+    link: bookItem.volumeInfo.infoLink,
+    subject: bookItem.volumeInfo.description,
+  });
+};
 
 /** @return {Book[]} */
 const getFakeBooks = () =>
@@ -22,21 +36,18 @@ const getFakeBooks = () =>
     });
 
 export default function BookSearch() {
-  const [searchResults, setSearchResults] = useState(/** @type {Book[]}*/ ([]));
-
-  function handleSearch(data) {
-    console.log(data);
-    //pretend we data
-
-    setSearchResults(getFakeBooks());
-  }
+  const [searchResults, setSearchResults] = useState(
+    /** @type {import("../../books").GBooksResult}*/ ({})
+  );
+  // const /**@type {Array<number>} */ fbooks = /** @type {Array<number>} */ (/**@type {any} */ ( getFakeBooks()))
+  // const /**@type {Array<number>} */ fbooks =  getFakeBooks() as any as Array<number>
 
   return (
     <section className="booksearch-bx">
       <Container>
         <Stack className="book-search" direction="horizontal">
-          <BookSearchForm onSubmit={handleSearch} />
-          <BookGrid bookList={searchResults} />
+          <BookSearchForm onResults={setSearchResults} />
+          <BookGrid books={searchResults?.items?.map(transform)} />
         </Stack>
       </Container>
     </section>
