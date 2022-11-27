@@ -39,8 +39,6 @@ export default function BookSearch() {
   const [searchResults, setSearchResults] = useState(
     /** @type {import("../../books").GBooksResult}*/ ({})
   );
-  // const /**@type {Array<number>} */ fbooks = /** @type {Array<number>} */ (/**@type {any} */ ( getFakeBooks()))
-  // const /**@type {Array<number>} */ fbooks =  getFakeBooks() as any as Array<number>
 
   return (
     <section className="booksearch-bx">

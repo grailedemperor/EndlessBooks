@@ -12,7 +12,7 @@ export default function BookGrid(/**@type {{books:Book[]}} */ { books }) {
   );
 
   const addToLibrary = (/**@type {Book} */ transformedItem) => {
-    //mak call to send formated item to backend
+    //make call to send formatted item to backend
     console.log({ transformedItem });
     addBookToLibrary({ variables: transformedItem });
   };
@@ -62,7 +62,6 @@ function BookGridCard(
           src={!image?.length ? "https://via.placeholder.com/150" : image}
           alt="book cover"
         />
-        {/* give me a secon ,my headphone died */}
       </div>
 
       <div>{title}</div>
