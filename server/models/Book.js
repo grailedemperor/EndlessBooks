@@ -3,18 +3,18 @@ const { Schema, model } = require("mongoose");
 const bookSchema = new Schema({
   title: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
   authors: [
     {
       type: String,
-      required: true,
+      required: false,
     },
   ],
   subject: {
     type: String,
-    required: true,
+    required: false,
   },
   image: {
     type: String,
@@ -26,7 +26,7 @@ const bookSchema = new Schema({
   },
   read: {
     type: Boolean,
-    required: true,
+    required: false,
   },
 });
 

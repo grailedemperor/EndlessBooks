@@ -24,13 +24,16 @@ const resolvers = {
       return await Book.findById(args.bookId).populate();
     },
 
-    books: async () => {
-      return User.findById().populate("books");
+    books: async (parent, args, context) => {
+      if (context.user) {
+        return User.findById().populate("books");
+      }
     },
 
     // TODO: Needs to be edited to only populate signed-in user's books
     toBeRead: async () => {
-      return await Book.find({ read: false }).populate();
+      return await User.findById().populate("books", { read: false });
+      // Book.find({ read: false })
     },
   },
 
@@ -93,16 +96,10 @@ const resolvers = {
       }
     },
 
-    readBook: async (parent, { read }, context) => {
+    readBook: async (parent, { bookId }, context) => {
+      // console.log(bookId);
       if (context.user) {
-        return await Book.findByIdAndUpdate(
-          context.book._id,
-          // TODO: This might need to be reverted to args
-          { read: true },
-          {
-            new: true,
-          }
-        );
+        return await Book.findByIdAndUpdate(bookId, { read: true });
       }
 
       throw new AuthenticationError("Not logged in");

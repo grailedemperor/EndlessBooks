@@ -65,3 +65,17 @@ export const REMOVE_BOOK = gql`
     }
   }
 `;
+
+export const READ_BOOK = gql`
+  mutation readBook($bookId: ID!) {
+    read(bookId: $bookId) {
+      _id
+      title
+      authors
+      subject
+      image
+      link
+      read
+    }
+  }
+`;
