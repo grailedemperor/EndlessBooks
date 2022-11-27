@@ -28,6 +28,26 @@ export const BookByIDQuery = gql`
   }
 `;
 
+// To show signed in user's books
+export const GET_ME = gql`
+  {
+    me {
+      _id
+      username
+      email
+      books {
+        _id
+        title
+        authors
+        subject
+        image
+        link
+        read
+      }
+    }
+  }
+`;
+
 export const Books_TO_BE_READ = gql`
   query ToBeRead {
     toBeRead {

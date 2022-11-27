@@ -24,12 +24,16 @@ const resolvers = {
       return await Book.findById(args.bookId).populate();
     },
 
-    books: async () => {
-      return Book.find({});
+    books: async (parent, args, context) => {
+      if (context.user) {
+        return User.findById().populate("books");
+      }
     },
 
+    // TODO: Needs to be edited to only populate signed-in user's books
     toBeRead: async () => {
-      return await Book.find({ read: false }).populate();
+      return await User.findById().populate("books", { read: false });
+      // Book.find({ read: false })
     },
   },
 
@@ -68,31 +72,34 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addBook: async (
-      parent,
-      { title, authors, subject, image, link, read = false, bookId = "" }
-    ) => {
-      return await Book.create({
-        title,
-        authors,
-        subject,
-        image,
-        link,
-        read,
-        bookId,
-      });
+    addBook: async (parent, { newBook }, context) => {
+      if (context.user) {
+        const updateUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { books: newBook } },
+          { new: true }
+        );
+
+        return updateUser;
+      }
     },
 
-    readBook: async (parent, { read }, context) => {
+    removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
-        return await Book.findByIdAndUpdate(
-          context.book._id,
-          // TODO: This might need to be reverted to args
-          { read: true },
-          {
-            new: true,
-          }
+        const updateUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { books: bookId } },
+          { new: true }
         );
+
+        return updateUser;
+      }
+    },
+
+    readBook: async (parent, { bookId }, context) => {
+      // console.log(bookId);
+      if (context.user) {
+        return await Book.findByIdAndUpdate(bookId, { read: true });
       }
 
       throw new AuthenticationError("Not logged in");
