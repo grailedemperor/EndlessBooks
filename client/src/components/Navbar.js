@@ -1,13 +1,16 @@
 import { Container, Nav, Navbar, Stack } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../assets/img/library.svg";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import book from "../assets/img/book.svg";
+import { WonderousContex } from "../utils/context";
 
 const NavBar = () => {
+  const { authState, setAuthState } = useContext(WonderousContex);
   const [activeLink, setActiveLink] = useState("home");
 
   const [scrolled, seScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => {
@@ -25,6 +28,11 @@ const NavBar = () => {
     setActiveLink(value);
   };
 
+  const logout = () => {
+    setAuthState({ token: "", user: {} });
+    navigate("/login");
+  };
+
   const getNavClasses = (key) => {
     let result = "navbar-link navi text-white";
 
@@ -35,9 +43,37 @@ const NavBar = () => {
     return result;
   };
 
+  const showLoginLogout = () => {
+    if (!authState?.token?.length) {
+      return (
+        <NavLink
+          to="/"
+          className={getNavClasses("login")}
+          onClick={() => onUpdateActiveLink("login")}
+        >
+          <Stack direction="horizontal" gap={1}>
+            Login <img className="book" src={book} alt="book" />
+          </Stack>
+        </NavLink>
+      );
+    }
+
+    return (
+      <NavLink
+        to="/"
+        className={getNavClasses("logout")}
+        onClick={() => onUpdateActiveLink("logout")}
+      >
+        <Stack direction="horizontal" gap={1}>
+          Logout <img className="book" src={book} alt="book" />
+        </Stack>
+      </NavLink>
+    );
+  };
+
   return (
     <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
-      <Container className="text-whit">
+      <Container className="text-white">
         <Navbar.Brand>
           <NavLink to="/">
             <img className="lib-logo" src={logo} alt="logo" />
@@ -50,17 +86,7 @@ const NavBar = () => {
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <li>
-              <NavLink
-                to="/"
-                className={getNavClasses("login")}
-                onClick={() => onUpdateActiveLink("login")}
-              >
-                <Stack direction="horizontal" gap={1}>
-                  Login <img className="book" src={book} alt="book" />
-                </Stack>
-              </NavLink>
-            </li>
+            <li>{showLoginLogout()}</li>
             <li>
               <NavLink
                 to="/register"

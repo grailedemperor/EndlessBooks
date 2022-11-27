@@ -1,10 +1,10 @@
 type Book = {
   _id: ID;
-  name: string;
-  author: string;
-  genre: string;
-  year: Number;
-  read: Boolean;
-  title: string;
-  imageUrl: string;
+  title: String;
+  authors: [String];
+  subject: String;
+  image: String;
+  link: String;
+  read: Boolean!;
+  bookId: String!;
 };

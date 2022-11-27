@@ -21,7 +21,7 @@ const resolvers = {
     },
 
     book: async (parent, args) => {
-      return await Book.findbyId(args.id).populate();
+      return await Book.findById(args.bookId).populate();
     },
 
     books: async () => {
@@ -68,8 +68,19 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    addBook: async (parent, { title, authors, subject, image, link, read }) => {
-      return await Book.create({ title, authors, subject, image, link, read });
+    addBook: async (
+      parent,
+      { title, authors, subject, image, link, read = false, bookId = "" }
+    ) => {
+      return await Book.create({
+        title,
+        authors,
+        subject,
+        image,
+        link,
+        read,
+        bookId,
+      });
     },
 
     readBook: async (parent, { read }, context) => {
