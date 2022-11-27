@@ -16,8 +16,8 @@ const typeDefs = gql`
     subject: String
     image: String
     link: String
-    read: Boolean!
-    bookId: String!
+    read: Boolean
+    bookId: String
   }
 
   input InsertedBook {
@@ -27,6 +27,7 @@ const typeDefs = gql`
     image: String
     link: String
     read: Boolean
+    bookId: String
   }
 
   type Auth {

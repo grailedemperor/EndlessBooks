@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-// import Input from "../components/Input";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
 
 export default function Register(props) {
-  // const [username, setUserName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -47,7 +42,6 @@ export default function Register(props) {
             type="userName"
             id="userName"
             onChange={handleChange}
-            // value="userName"
           />
         </div>
         <div>
@@ -57,7 +51,6 @@ export default function Register(props) {
             type="email"
             id="email"
             onChange={handleChange}
-            // value="email"
           />
         </div>
         <div>
@@ -67,7 +60,6 @@ export default function Register(props) {
             type="password"
             id="password"
             onChange={handleChange}
-            // value="password"
           />
         </div>
         <div className="flex-row flex-end">
