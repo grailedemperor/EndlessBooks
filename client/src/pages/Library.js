@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import BookGrid from "../components/BookGrid";
 
 function Library() {
-  // gt allbooks
+  // get allbooks
   const { loading, data } = useQuery(AllBooksQuery);
 
   /** @type {{books:Book[]}} */
