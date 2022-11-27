@@ -70,13 +70,13 @@ export const ADDBOOK_MUTATION = gql`
     $bookId: String!
   ) {
     addBook(
-      title: $title
-      subject: $subject
-      image: $image
-      link: $link
-      bookId: $bookId
-    ) {
-      _id
-    }
+      newBook: {
+        title: $title
+        subject: $subject
+        image: $image
+        link: $link
+        bookId: $bookId
+      }
+    )
   }
 `;
