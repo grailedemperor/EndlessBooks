@@ -5,7 +5,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const resolvers = {
   Query: {
     user: async (parent, { userId }) => {
-      return User.findbyId({ _id: userId }).populate("books");
+      return User.findById({ _id: userId }).populate("books");
     },
     users: async () => {
       return User.find().populate("books");
@@ -26,12 +26,12 @@ const resolvers = {
 
     books: async (parent, args, context) => {
       //get the books
-      if (context.user) {
-        //get the boks that belong to the signed in user
-        // return User.findById(context.user._id).populate("books");
+      // if (context.user) {
+      //get the books that belong to the signed in user
+      // return User.findById(context.user._id).populate("books");
 
-        return Book.find({ userId: context.user._id });
-      }
+      return Book.find();
+      // }
     },
 
     // TODO: Needs to be edited to only populate signed-in user's books
@@ -77,13 +77,21 @@ const resolvers = {
     },
 
     addBook: async (parent, { newBook }, context) => {
-      if (!context.user) {
-        throw Error("Error: no authenticated user");
-      }
+      // Updated addBook so it adds book to user array
+      if (context.user) {
+        const book = await Book.create({
+          ...newBook,
+          userId: context.user._id,
+        }).then(({ _id }) => _id);
 
-      return Book.create({ ...newBook, userId: context.user._id }).then(
-        ({ _id }) => _id
-      );
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { books: book._id } }
+        );
+
+        return book;
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     removeBook: async (parent, { bookId }, context) => {
