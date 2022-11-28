@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, HashRouter } from "react-router
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./components/HomePage";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BookSearch from "./pages/BookSearch";
@@ -23,6 +23,10 @@ function App() {
     authState,
     setAuthState,
   };
+
+  useEffect(()=>{
+    localStorage.setItem('auth_token',authState.token)
+  },[authState])
 
   return (
     <WonderousContex.Provider value={store}>

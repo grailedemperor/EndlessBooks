@@ -1,18 +1,36 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import {
   ApolloClient,
-  InMemoryCache,
+  ApolloLink,
   ApolloProvider,
-  gql,
+  HttpLink,
+  InMemoryCache,
 } from "@apollo/client";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+
+const httpLink = new HttpLink({ uri: process.env.REACT_APP_GRAPHQL_URL });
+
+const authLink = new ApolloLink((operation, forward) => {
+  // Retrieve the authorization token from local storage.
+  const token = localStorage.getItem("auth_token");
+
+  // Use the setContext method to set the HTTP headers.
+  operation.setContext({
+    headers: {
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  });
+
+  // Call the next link in the middleware chain.
+  return forward(operation);
+});
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_GRAPHQL_URL,
   cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

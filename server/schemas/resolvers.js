@@ -25,8 +25,12 @@ const resolvers = {
     },
 
     books: async (parent, args, context) => {
+      //get the books
       if (context.user) {
-        return User.findById().populate("books");
+        //get the boks that belong to the signed in user
+        // return User.findById(context.user._id).populate("books");
+
+        return Book.find({ userId: context.user._id });
       }
     },
 
@@ -73,15 +77,13 @@ const resolvers = {
     },
 
     addBook: async (parent, { newBook }, context) => {
-      if (context.user) {
-        const updateUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { books: newBook } },
-          { new: true }
-        );
-
-        return updateUser;
+      if (!context.user) {
+        throw Error("Error: no authenticated user");
       }
+
+      return Book.create({ ...newBook, userId: context.user._id }).then(
+        ({ _id }) => _id
+      );
     },
 
     removeBook: async (parent, { bookId }, context) => {
