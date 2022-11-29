@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import React from "react";
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import { ADDBOOK_MUTATION } from "../utils/mutations";
-import { AllBooksQuery } from "../utils/queries";
+import { AllBooksQuery, GET_ME } from "../utils/queries";
 import Input from "./Input";
 
 export default function BookGrid(/**@type {{books:Book[]}} */ { books }) {
