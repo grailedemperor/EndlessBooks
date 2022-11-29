@@ -29,15 +29,14 @@ const resolvers = {
       // if (context.user) {
       //get the books that belong to the signed in user
       // return User.findById(context.user._id).populate("books");
-
       return Book.find();
       // }
     },
 
     // TODO: Needs to be edited to only populate signed-in user's books
     toBeRead: async () => {
-      return await User.findById().populate("books", { read: false });
-      // Book.find({ read: false })
+      // return await User.findById().populate("books", { read: false });
+      return Book.find({ read: false });
     },
   },
 
@@ -82,6 +81,7 @@ const resolvers = {
         const book = await Book.create({
           ...newBook,
           userId: context.user._id,
+          read: false,
         }).then(({ _id }) => _id);
 
         await User.findOneAndUpdate(
