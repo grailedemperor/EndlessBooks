@@ -108,11 +108,11 @@ const resolvers = {
 
     readBook: async (parent, { bookId }, context) => {
       // console.log(bookId);
-      if (context.user) {
-        return await Book.findByIdAndUpdate(bookId, { read: true });
-      }
+      // if (context.user) {
+      return await Book.findByIdAndUpdate(bookId, { read: true });
+      // }
 
-      throw new AuthenticationError("Not logged in");
+      // throw new AuthenticationError("Not logged in");
     },
   },
 };

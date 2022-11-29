@@ -1,20 +1,18 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
 import { Col, Container, Row, Stack } from "react-bootstrap";
-import { ADDBOOK_MUTATION } from "../utils/mutations";
-import { AllBooksQuery, GET_ME } from "../utils/queries";
-import Input from "./Input";
+import { READ_BOOK } from "../utils/mutations";
+import { BooksToBeRead } from "../utils/queries";
 
-export default function BookGrid(/**@type {{books:Book[]}} */ { books }) {
-  const [addBookToLibrary, { error, isLoading }] = useMutation(
-    ADDBOOK_MUTATION,
-    { refetchQueries: [{ query: AllBooksQuery }] }
-  );
+export default function TbrGrid(/**@type {{books:Book[]}} */ { books }) {
+  const [bookRead, { error, isLoading }] = useMutation(READ_BOOK, {
+    refetchQueries: [{ query: BooksToBeRead }],
+  });
 
-  const addToLibrary = (/**@type {Book} */ transformedItem) => {
+  const readThisBook = (/**@type {Book} */ bookId) => {
     //make call to send formatted item to backend
-    console.log({ transformedItem });
-    addBookToLibrary({ variables: transformedItem });
+    console.log({ bookId });
+    bookRead({ variables: { bookId } });
   };
 
   return (
@@ -23,9 +21,9 @@ export default function BookGrid(/**@type {{books:Book[]}} */ { books }) {
         <Col className="book-grid-bx">
           {books?.map((item) => {
             return (
-              <BookGridCard
+              <TbrGridCard
                 {...item}
-                handleClick={() => addToLibrary(item)}
+                handleClick={() => readThisBook(item._id)}
                 key={item._id}
               />
             );
@@ -36,7 +34,7 @@ export default function BookGrid(/**@type {{books:Book[]}} */ { books }) {
   );
 }
 
-function BookGridCard(
+function TbrGridCard(
   /**@type {Book & {handleClick:(e:import("react").SyntheticEvent) =>void}}*/ {
     title,
     image,
@@ -44,11 +42,11 @@ function BookGridCard(
     handleClick,
   }
 ) {
-  const showAddButton = (_id) => {
-    if (!_id?.length) {
+  const showReadButton = (_id) => {
+    if (_id?.length) {
       return (
         <Stack>
-          <button onClick={handleClick}>Add to Library</button>
+          <button onClick={handleClick}>I've Read This</button>
         </Stack>
       );
     }
@@ -70,7 +68,7 @@ function BookGridCard(
 
       <div>{title}</div>
 
-      {showAddButton(_id)}
+      {showReadButton(_id)}
     </Stack>
   );
 }
