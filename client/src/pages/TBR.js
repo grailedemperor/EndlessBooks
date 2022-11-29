@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import { BooksToBeRead } from "../utils/queries";
 import { useQuery } from "@apollo/client";
-import BookGrid from "../components/BookGrid";
+import TbrGrid from "../components/TbrGrid.js";
 
 function TBR() {
   // get allbooks
@@ -21,7 +21,7 @@ function TBR() {
         <h2>To Be Read</h2>
       </Row>
       <Row>
-        <BookGrid books={toBeRead} />
+        <TbrGrid books={toBeRead} />
       </Row>
     </Container>
   );
