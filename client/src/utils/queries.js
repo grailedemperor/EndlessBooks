@@ -48,7 +48,7 @@ export const GET_ME = gql`
   }
 `;
 
-export const Books_TO_BE_READ = gql`
+export const BooksToBeRead = gql`
   query ToBeRead {
     toBeRead {
       _id
